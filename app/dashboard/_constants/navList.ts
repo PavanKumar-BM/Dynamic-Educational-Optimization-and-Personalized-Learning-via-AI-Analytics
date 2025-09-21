@@ -3,6 +3,7 @@ import {
   LuLayoutDashboard,
   LuAtom,
   LuShieldCheck,
+  LuChartLine,
 } from "react-icons/lu";
 
 type NavListType = {
@@ -30,5 +31,11 @@ export const navList: NavListType[] = [
     name: "Upgrade",
     icon: LuShieldCheck,
     route: "/dashboard/upgrade",
+  },
+  {
+    id: 4,
+    name: "Analytics",
+    icon: LuChartLine,
+    route: "/dashboard/analytics",
   },
 ];

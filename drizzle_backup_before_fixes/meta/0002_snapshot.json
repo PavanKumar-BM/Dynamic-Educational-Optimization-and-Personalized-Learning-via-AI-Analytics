@@ -1,0 +1,91 @@
+{
+  "version": "7",
+  "dialect": "postgres",
+  "tables": {
+    "courseList": {
+      "columns": {
+        "courseId": { "type": "serial", "primaryKey": true },
+        "courseName": { "type": "varchar", "length": 255 },
+        "description": { "type": "text" },
+        "createdAt": { "type": "timestamp", "withTimezone": true }
+      },
+      "indexes": [],
+      "constraints": []
+    },
+    "courseChapters": {
+      "columns": {
+        "chapterId": { "type": "serial", "primaryKey": true },
+        "courseId": { "type": "integer" },
+        "chapterTitle": { "type": "varchar", "length": 255 },
+        "content": { "type": "text" },
+        "order": { "type": "integer" }
+      },
+      "indexes": [],
+      "constraints": [
+        { "type": "foreignKey", "columns": ["courseId"], "references": { "table": "courseList", "columns": ["courseId"] } }
+      ]
+    },
+    "userStudySessions": {
+      "columns": {
+        "sessionId": { "type": "serial", "primaryKey": true },
+        "userId": { "type": "varchar", "length": 36 },
+        "courseId": { "type": "integer" },
+        "chapterId": { "type": "integer" },
+        "startTime": { "type": "timestamp", "withTimezone": true },
+        "endTime": { "type": "timestamp", "withTimezone": true },
+        "duration": { "type": "real" },
+        "sessionType": { "type": "varchar", "length": 32 }
+      },
+      "indexes": [
+        { "columns": ["userId"], "name": "idx_userStudySessions_userId" },
+        { "columns": ["courseId"], "name": "idx_userStudySessions_courseId" },
+        { "columns": ["startTime"], "name": "idx_userStudySessions_startTime" }
+      ],
+      "constraints": [
+        { "type": "foreignKey", "columns": ["courseId"], "references": { "table": "courseList", "columns": ["courseId"] } },
+        { "type": "foreignKey", "columns": ["chapterId"], "references": { "table": "courseChapters", "columns": ["chapterId"] } }
+      ]
+    },
+    "chapterProgress": {
+      "columns": {
+        "progressId": { "type": "serial", "primaryKey": true },
+        "userId": { "type": "varchar", "length": 36 },
+        "courseId": { "type": "integer" },
+        "chapterId": { "type": "integer" },
+        "isCompleted": { "type": "boolean", "default": false },
+        "timeSpent": { "type": "real" },
+        "completionDate": { "type": "timestamp", "withTimezone": true },
+        "progressPercentage": { "type": "real", "default": 0 }
+      },
+      "indexes": [
+        { "columns": ["userId"], "name": "idx_chapterProgress_userId" },
+        { "columns": ["courseId"], "name": "idx_chapterProgress_courseId" },
+        { "columns": ["chapterId"], "name": "idx_chapterProgress_chapterId" }
+      ],
+      "constraints": [
+        { "type": "foreignKey", "columns": ["courseId"], "references": { "table": "courseList", "columns": ["courseId"] } },
+        { "type": "foreignKey", "columns": ["chapterId"], "references": { "table": "courseChapters", "columns": ["chapterId"] } }
+      ]
+    },
+    "courseProgress": {
+      "columns": {
+        "progressId": { "type": "serial", "primaryKey": true },
+        "userId": { "type": "varchar", "length": 36 },
+        "courseId": { "type": "integer" },
+        "totalTimeSpent": { "type": "real" },
+        "completionPercentage": { "type": "real", "default": 0 },
+        "chaptersCompleted": { "type": "integer", "default": 0 },
+        "lastAccessedDate": { "type": "timestamp", "withTimezone": true },
+        "isCompleted": { "type": "boolean", "default": false }
+      },
+      "indexes": [
+        { "columns": ["userId"], "name": "idx_courseProgress_userId" },
+        { "columns": ["courseId"], "name": "idx_courseProgress_courseId" },
+        { "columns": ["lastAccessedDate"], "name": "idx_courseProgress_lastAccessedDate" }
+      ],
+      "constraints": [
+        { "type": "foreignKey", "columns": ["courseId"], "references": { "table": "courseList", "columns": ["courseId"] } }
+      ]
+    }
+  }
+}

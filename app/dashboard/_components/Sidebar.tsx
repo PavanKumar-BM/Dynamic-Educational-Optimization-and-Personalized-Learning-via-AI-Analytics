@@ -22,18 +22,23 @@ const Sidebar = () => {
 
       <ul>
         {navList.map((item) => (
-          <Link href={item.route} key={item.id}>
-            <div
-              className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${
-                item.route === path && "bg-gray-100 text-black"
-              }`}
-            >
-              <div className="text-2xl">
-                <item.icon />
-              </div>
-              <h2>{item.name}</h2>
-            </div>
-          </Link>
+            <Link href={item.route} key={item.id}>
+              {(() => {
+                const isActive = path === item.route || path.startsWith(item.route + "/");
+                return (
+                  <div
+                    className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${
+                      isActive && "bg-gray-100 text-black"
+                    }`}
+                  >
+                    <div className="text-2xl">
+                      <item.icon />
+                    </div>
+                    <h2>{item.name}</h2>
+                  </div>
+                );
+              })()}
+            </Link>
         ))}
       </ul>
 

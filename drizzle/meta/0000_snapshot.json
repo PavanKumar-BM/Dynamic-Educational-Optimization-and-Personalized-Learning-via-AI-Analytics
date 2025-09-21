@@ -1,9 +1,109 @@
 {
-  "id": "cc594728-ed23-426b-9c66-91336f529d28",
+  "id": "e50f22df-9fa7-48f3-ae85-703c75d14aa0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.chapterProgress": {
+      "name": "chapterProgress",
+      "schema": "",
+      "columns": {
+        "progressId": {
+          "name": "progressId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "courseRowId": {
+          "name": "courseRowId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chapterRowId": {
+          "name": "chapterRowId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "isCompleted": {
+          "name": "isCompleted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "timeSpent": {
+          "name": "timeSpent",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "completionDate": {
+          "name": "completionDate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "progressPercentage": {
+          "name": "progressPercentage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.courseChapters": {
+      "name": "courseChapters",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "courseId": {
+          "name": "courseId",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chapterId": {
+          "name": "chapterId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "videoId": {
+          "name": "videoId",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "public.courseList": {
       "name": "courseList",
       "schema": "",
@@ -32,11 +132,24 @@
           "primaryKey": false,
           "notNull": true
         },
+        "level": {
+          "name": "level",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
         "courseOutput": {
           "name": "courseOutput",
           "type": "json",
           "primaryKey": false,
           "notNull": true
+        },
+        "isVideo": {
+          "name": "isVideo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Yes'"
         },
         "username": {
           "name": "username",
@@ -50,18 +163,143 @@
           "primaryKey": false,
           "notNull": false
         },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
+        "createdBy": {
+          "name": "createdBy",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "courseBanner": {
+          "name": "courseBanner",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isPublished": {
+          "name": "isPublished",
+          "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "default": "now()"
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.courseProgress": {
+      "name": "courseProgress",
+      "schema": "",
+      "columns": {
+        "progressId": {
+          "name": "progressId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp",
+        "userId": {
+          "name": "userId",
+          "type": "varchar(36)",
           "primaryKey": false,
           "notNull": true
+        },
+        "courseRowId": {
+          "name": "courseRowId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "totalTimeSpent": {
+          "name": "totalTimeSpent",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "completionPercentage": {
+          "name": "completionPercentage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "chaptersCompleted": {
+          "name": "chaptersCompleted",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "lastAccessedDate": {
+          "name": "lastAccessedDate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "isCompleted": {
+          "name": "isCompleted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.userStudySessions": {
+      "name": "userStudySessions",
+      "schema": "",
+      "columns": {
+        "sessionId": {
+          "name": "sessionId",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "varchar(36)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "courseRowId": {
+          "name": "courseRowId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chapterRowId": {
+          "name": "chapterRowId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "startTime": {
+          "name": "startTime",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "endTime": {
+          "name": "endTime",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "duration": {
+          "name": "duration",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sessionType": {
+          "name": "sessionType",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
