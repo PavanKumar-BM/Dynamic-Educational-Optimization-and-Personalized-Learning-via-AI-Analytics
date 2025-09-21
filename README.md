@@ -1,7 +1,6 @@
 # AI Course Generator
 
-AI Course Generator is a platform that allows users to easily create
-and generate educational courses using artificial intelligence. By simply entering course details like name, duration, number of chapters, and specifying if videos are included, Gemeni AI generates the entire course structure along with relevant YouTube videos for each chapter.
+Dynamic-Educational-Optimization-and-Personalized-Learning-via-AI-Analytics is a platform that allows users to easily create and generate educational courses using artificial intelligence. By simply entering course details like name, duration, number of chapters, and specifying if videos are included, Gemeni AI generates the entire course structure along with relevant YouTube videos for each chapter.
 
 ## Features
 
@@ -27,13 +26,13 @@ and generate educational courses using artificial intelligence. By simply enteri
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/bhataasim1/ai-content-generator.git
+   git clone <Repo-link>
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd ai-content-generator
+   cd FilesName
    ```
 
 3. Install dependencies:
@@ -63,16 +62,3 @@ and generate educational courses using artificial intelligence. By simply enteri
    `bash
    npm run dev
 6. Visit`http://localhost:3000` to view the application.
-
-## Open to Contributions
-
-AI Course Generator is an open-source project and we welcome contributions from the community. If you would like to contribute to the project, please follow the steps below:
-
-1. Fork the repository.
-
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them to your branch.
-4. Push your changes to your fork.
-5. Create a pull request to the main repository.
-
-We look forward to your contributions!
