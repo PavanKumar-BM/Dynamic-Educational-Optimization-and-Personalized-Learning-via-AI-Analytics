@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentType } from "react";
 
 export type UserInputType = {
   category?: string;
@@ -117,9 +117,9 @@ export interface DateRangeFilter {
 }
 
 export enum AnalyticsTimeRange {
-  Week = 'week',
-  Month = 'month',
-  All = 'all',
+  Week = "week",
+  Month = "month",
+  All = "all",
 }
 
 export interface StudySessionFilter {
@@ -153,7 +153,7 @@ export interface UserAnalyticsSummary {
 export interface LearningInsight {
   title: string;
   description: string;
-  type: 'strength' | 'opportunity' | 'trend';
+  type: "strength" | "opportunity" | "trend";
 }
 
 // Calculation Result Types

@@ -1,14 +1,41 @@
 "use client";
 import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from "recharts";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 import { LuCalendarDays, LuTrendingUp } from "react-icons/lu";
-import { PieChart as LucidePieChart, BarChart as LucideBarChart } from "lucide-react";
+import {
+  PieChart as LucidePieChart,
+  BarChart as LucideBarChart,
+} from "lucide-react";
 import { ny } from "@/lib/utils";
 
 // Mock Data
@@ -44,9 +71,15 @@ const performanceMetrics = [
 ];
 
 const learningInsights = [
-  { title: "Consistent Study", description: "You studied consistently for 5 days." },
+  {
+    title: "Consistent Study",
+    description: "You studied consistently for 5 days.",
+  },
   { title: "AI Mastery", description: "AI chapters are your strongest area." },
-  { title: "Math Needs Attention", description: "Math chapters have lower completion." },
+  {
+    title: "Math Needs Attention",
+    description: "Math chapters have lower completion.",
+  },
 ];
 
 export default function AnalyticsPage() {
@@ -55,7 +88,9 @@ export default function AnalyticsPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
         <Select defaultValue="week">
-          <SelectTrigger className="w-40"><SelectValue placeholder="This Week" /></SelectTrigger>
+          <SelectTrigger className="w-40">
+            <SelectValue placeholder="This Week" />
+          </SelectTrigger>
           <SelectContent>
             <SelectItem value="week">This Week</SelectItem>
             <SelectItem value="month">This Month</SelectItem>
@@ -66,11 +101,18 @@ export default function AnalyticsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         {performanceMetrics.map((metric, idx) => (
-          <Card key={idx} className="flex flex-col items-center justify-center gap-2">
+          <Card
+            key={idx}
+            className="flex flex-col items-center justify-center gap-2"
+          >
             <CardHeader className="items-center">
               <metric.icon className="text-3xl text-primary" />
-              <CardTitle className="text-lg font-semibold">{metric.value}</CardTitle>
-              <CardDescription className="text-xs text-gray-500">{metric.label}</CardDescription>
+              <CardTitle className="text-lg font-semibold">
+                {metric.value}
+              </CardTitle>
+              <CardDescription className="text-xs text-gray-500">
+                {metric.label}
+              </CardDescription>
             </CardHeader>
           </Card>
         ))}
@@ -93,9 +135,20 @@ export default function AnalyticsPage() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={200}>
                   <PieChart>
-                    <Pie data={subjectDistribution} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
+                    <Pie
+                      data={subjectDistribution}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={60}
+                      label
+                    >
                       {subjectDistribution.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
                       ))}
                     </Pie>
                   </PieChart>
@@ -131,7 +184,12 @@ export default function AnalyticsPage() {
                   <XAxis dataKey="chapter" />
                   <YAxis />
                   <Tooltip />
-                  <Line type="monotone" dataKey="progress" stroke="#00C49F" strokeWidth={2} />
+                  <Line
+                    type="monotone"
+                    dataKey="progress"
+                    stroke="#00C49F"
+                    strokeWidth={2}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -149,7 +207,12 @@ export default function AnalyticsPage() {
                   <XAxis dataKey="date" />
                   <YAxis />
                   <Tooltip />
-                  <Line type="monotone" dataKey="duration" stroke="#FFBB28" strokeWidth={2} />
+                  <Line
+                    type="monotone"
+                    dataKey="duration"
+                    stroke="#FFBB28"
+                    strokeWidth={2}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>

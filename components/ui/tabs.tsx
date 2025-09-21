@@ -7,7 +7,11 @@ const Tabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
 >(({ className, ...props }, ref) => (
-  <TabsPrimitive.Root ref={ref} className={ny("w-full", className)} {...props} />
+  <TabsPrimitive.Root
+    ref={ref}
+    className={ny("w-full", className)}
+    {...props}
+  />
 ));
 Tabs.displayName = "Tabs";
 
