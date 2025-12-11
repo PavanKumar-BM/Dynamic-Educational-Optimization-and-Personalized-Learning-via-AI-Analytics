@@ -1,5 +1,5 @@
 # Dynamic Educational Optimization and Personalized Learning via AI Analytics 
-
+# Alternative title (Clarity-Learn (AI Learning Platform)) 
 Dynamic-Educational-Optimization-and-Personalized-Learning-via-AI-Analytics is a platform that allows users to easily create and generate educational courses using artificial intelligence. By simply entering course details like name, duration, number of chapters, and specifying if videos are included, Gemeni AI generates the entire course structure along with relevant YouTube videos for each chapter.
 
 ## Features
